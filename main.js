@@ -5,35 +5,53 @@ const desktopMenu = document.querySelector(".desktop-menu");
 const mobileMenu = document.querySelector(".mobile-menu");
 const shopingCart = document.querySelector(".navbar-shopping-cart");
 const shopingCartContainer = document.querySelector("#shopingCartContainer");
+const productDetailsContainer = document.querySelector("#productDetail");
 const cardsContainer = document.querySelector(".cards-container");
+const productDetailCloseIcon = document.querySelector(".product-detail-close");
 
 //LISTENERS//
 navEmail.addEventListener("click", toggleDesktopMenu);
 burgerMenu.addEventListener("click", toggleMobileMenu);
 shopingCart.addEventListener("click", toggleCarritoAside);
+// productDetailsContainer.addEventListener("click", openProductDetailContainer);
+//El errror que tenia era que estaba llamando a dos diferentes funciones al hacer cliock al mismo contenedor
+productDetailCloseIcon.addEventListener("click", closeProductDetailContainer);
 
 function toggleDesktopMenu() {
   // desktopMenu.style.display ===  "none" ? desktopMenu.style.display = 'block' : desktopMenu.style.display = 'none'
   const isAsideMenuClosed = shopingCartContainer.classList.contains("inactive");
+  const isProductDetailContainerClosed =
+    productDetailsContainer.classList.contains("inactive");
   desktopMenu.classList.toggle("inactive");
 
   if (!isAsideMenuClosed) {
     shopingCartContainer.classList.add("inactive");
   }
+  if (!isProductDetailContainerClosed) {
+    productDetailsContainer.classList.add("inactive");
+  }
 }
 
 function toggleMobileMenu() {
   const isAsideMenuClosed = shopingCartContainer.classList.contains("inactive");
+  const isProductDetailContainerClosed =
+    productDetailsContainer.classList.contains("inactive");
   mobileMenu.classList.toggle("inactive");
 
   if (!isAsideMenuClosed) {
     shopingCartContainer.classList.add("inactive");
+  }
+  if (!isProductDetailContainerClosed) {
+    productDetailsContainer.classList.add("inactive");
   }
 }
 
 function toggleCarritoAside() {
   const isMobileMenuClosed = mobileMenu.classList.contains("inactive");
   const isMenuDesktopClosed = desktopMenu.classList.contains("inactive");
+  const isProductDetailContainerClosed =
+    productDetailsContainer.classList.contains("inactive");
+
   shopingCartContainer.classList.toggle("inactive");
 
   if (!isMobileMenuClosed) {
@@ -43,6 +61,19 @@ function toggleCarritoAside() {
   if (!isMenuDesktopClosed) {
     desktopMenu.classList.add("inactive");
   }
+
+  if (!isProductDetailContainerClosed) {
+    productDetailsContainer.classList.add("inactive");
+  }
+}
+
+function openProductDetailContainer() {
+  shopingCartContainer.classList.add("inactive");
+  productDetailsContainer.classList.remove("inactive");
+  desktopMenu.classList.add("inactive");
+}
+function closeProductDetailContainer() {
+  productDetailsContainer.classList.add("inactive");
 }
 
 const productList = [];
@@ -70,6 +101,7 @@ function renderProducts(array) {
     const productCard = document.createElement("div");
     const productCardImage = document.createElement("img");
     productCardImage.setAttribute("src", product.image);
+    productCardImage.addEventListener("click", openProductDetailContainer);
     const productInfo = document.createElement("div");
     const productInfoDiv = document.createElement("div");
     const productPrice = document.createElement("p");
@@ -99,4 +131,4 @@ function renderProducts(array) {
   }
 }
 
-renderProducts(productList)
+renderProducts(productList);
