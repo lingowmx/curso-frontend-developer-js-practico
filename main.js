@@ -8,6 +8,7 @@ const shopingCartContainer = document.querySelector("#shopingCartContainer");
 const productDetailsContainer = document.querySelector("#productDetail");
 const cardsContainer = document.querySelector(".cards-container");
 const productDetailCloseIcon = document.querySelector(".product-detail-close");
+// const darkenBackground = document.querySelector(".darken");
 
 //LISTENERS//
 navEmail.addEventListener("click", toggleDesktopMenu);
@@ -71,9 +72,11 @@ function openProductDetailContainer() {
   shopingCartContainer.classList.add("inactive");
   productDetailsContainer.classList.remove("inactive");
   desktopMenu.classList.add("inactive");
+  // darkenBackground.classList.remove('inactive')
 }
 function closeProductDetailContainer() {
   productDetailsContainer.classList.add("inactive");
+  darkenBackground.classList.add('inactive')
 }
 
 const productList = [];
